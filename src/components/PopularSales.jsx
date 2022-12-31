@@ -4,12 +4,12 @@ import { useEffect } from 'react'
 import Item from './utils/Item'
 import Title from './utils/Title' 
 
-const Sales = ({ ifExists, endpoint: { title, items } }) => {
+const PopularSales = ({ ifExists, endpoint: { title, items } }) => {
   // console.log(endpoint)
   let [products, setProducts] = useState([])
 
   useEffect( () =>{
-    fetch('http://localhost:5000/products')
+    fetch('http://localhost:5000/popular-sales')
     .then(res =>res.json())
     .then(data => setProducts(data))
 }, []);
@@ -29,4 +29,4 @@ const Sales = ({ ifExists, endpoint: { title, items } }) => {
   )
 }
 
-export default Sales
+export default PopularSales

@@ -5,8 +5,19 @@ import { HashtagIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import Title from "./utils/Title";
 import { truncate } from "lodash";
+import { useEffect } from "react";
+import { useState } from "react";
 
-const Stories = ({ story: { title, news } }) => {
+const Stories = ({ story : { title, news } }) => {
+
+  const [stories, setStories] = useState([])
+  
+  useEffect( () =>{
+    fetch('http://localhost:5000/stories')
+    .then(res =>res.json())
+    .then(data => setStories(data))
+}, []);
+
     const splideOptions = {
         perPage: 4,
         perMove: 1,
@@ -24,13 +35,14 @@ const Stories = ({ story: { title, news } }) => {
           425: { perPage: 1},
         },
       };
+
   return (
     <>
       <div className="nike-container mb-11">
         <Title title={title} />
         <div className="mt-7">
           <Splide options={splideOptions}>
-            {news.map((val, i) => (
+            {stories.map((val, i) => (
               <SplideSlide key={i} className="mb-0.5">
                 <div className="relative grid items-center gap-4 pb-2 rounded-lg shadow shadow-slate-200 ring-1 ring-slate-200">
                   <div className="flex items-center justify-center">

@@ -34,6 +34,13 @@ const Cart = () => {
     );
   };
 
+  let withFull = false 
+
+  const handelCheckOut = () => {
+    withFull = true
+    console.log(withFull)
+  }
+
   const onClearCartItems = () => {
     dispatch(setClearCartItems())
   }
@@ -48,7 +55,7 @@ const Cart = () => {
         }`}
       >
         <div
-          className={`blur-effect-theme duration-500 h-screen max-w-xl w-full absolute right-0 ${
+          className={`blur-effect-theme duration-500 h-screen ${withFull?"max-w-full":"max-w-full"}  w-full absolute right-0 ${
             ifCartState
               ? "opacity-100 visible translate-x-0"
               : "opacity-0 invisible translate-x-8"
@@ -69,10 +76,9 @@ const Cart = () => {
               </div>
               <div className="grid items-center gap-2">
                 <p className="text-sm font-medium text-center">Taxes and Shipping Will Calculate At Shipping</p>
-                <button type="button" className="button-theme bg-theme-cart text-white">Check Out</button>
+                <button type="button" onClick={()=>handelCheckOut()} className="button-theme bg-theme-cart text-white">Check Out</button>
               </div>
             </div>
-
           </div>}
         </div>
       </div>
